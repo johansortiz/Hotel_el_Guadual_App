@@ -1,0 +1,24 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Hotel el Guadual App</string>
+    <string name="titulo_login">LOGIN</string>
+    <string name="registro" translatable="false" tools:ignore="MissingTranslation">Registro</string>
+    <string name="nombres">Nombre</string>
+    <string name="correo">Correo Electrónico</string>
+    <string name="telefono">Teléfono</string>
+    <string name="contraseña">Password</string>
+    <string name="registrar">Registrar</string>
+    <string name="confirmar">Confirmar Password</string>
+    <string name="contraseña_no_coincide">Contraseñas no coinciden</string>
+    <string name="lugar_de_nacimiento">Lugar de nacimiento</string>
+    <string name="fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="login">LOGIN</string>
+    <string name="registrologin">REGISTRO</string>
+    <string name="exito">Registro Exitoso</string>
+    <string name="caracteres">Contraseña debe contener mas de 5 caracteres </string>
+    <string name="login_correo">Ingrese un correo</string>
+    <string name="login_contrasena">Ingrese un contraseña</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="salir">Cerrar sesión</string>
+    <string name="identificacion">Identificación</string>
+
+</resources>

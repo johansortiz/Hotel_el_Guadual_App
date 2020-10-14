@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Hotel el Guadual App</string>
+    <string name="titulo_login">LOGIN</string>
+    <string name="registro" >Registry</string>
+    <string name="nombres">Name</string>
+    <string name="correo">Email</string>
+    <string name="telefono">Phone</string>
+    <string name="contraseña">Password</string>
+    <string name="confirmar">Confirm Password</string>
+    <string name="registrar">Register</string>
+    <string name="contraseña_no_coincide">passwords do not match</string>
+    <string name="fecha_nacimiento">Date of birth</string>
+    <string name="lugar_de_nacimiento">City of birth</string>
+    <string name="login">LOGIN</string>
+    <string name="registrologin">REGISTRY</string>
+    <string name="exito">Successful registration</string>
+    <string name="caracteres">Password must contain more than 5 characters</string>
+    <string name="login_correo">Enter an email</string>
+    <string name="login_contrasena">Please enter a password</string>
+    <string name="identificacion">Identificación</string>
+    <string name="bienvenido">Welcome</string>
+    <string name="salir">Exit</string>
+</resources>
