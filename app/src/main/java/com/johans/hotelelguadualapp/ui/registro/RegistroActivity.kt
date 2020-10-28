@@ -3,11 +3,10 @@ package com.johans.hotelelguadualapp.ui.registro
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.johans.hotelelguadualapp.R
 import com.johans.hotelelguadualapp.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_registro.*
@@ -19,8 +18,8 @@ class RegistroActivity : AppCompatActivity() {
     companion object {
         private const val EMPTY = ""
         private const val SPACE = " "
-        private const val CITY_S = "Seleccione una ciudad"
-        private const val CITY_E = "Choose city"
+        private const val TIPO_S = "Tipo documento"
+        private const val TIPO_E = "document type"
     }
 
     private var fechaNacimiento: String = ""
@@ -65,52 +64,59 @@ class RegistroActivity : AppCompatActivity() {
             val confirmar = confirmar_edit_text.text.toString()
 
             val fecha = btn_show.text.toString()
-            val cadena:Int = contrasena.length
+            val cadena: Int = contrasena.length
+            val tipodocumento = tipo_documento_spinner.selectedItem
 
             when {
                 nombre.isEmpty() -> {
-                    Toast.makeText(this, getString(R.string.nombres), Toast.LENGTH_LONG).show()
+                    nombre_edit_text.error = getString(R.string.nombres)
                     nombre_edit_text.requestFocus()
                 }
 
-                identificacion.isEmpty() -> {
-                    Toast.makeText(this,getString(R.string.identificacion), Toast.LENGTH_LONG).show();
-                    identificacion_edit_text.requestFocus();
+                tipodocumento == TIPO_S || tipodocumento == TIPO_E -> {
+                    Toast.makeText(this, getString(R.string.tipo_documento), Toast.LENGTH_LONG)
+                        .show()
+                    tipo_documento_spinner.requestFocus()
                 }
-                correo.isEmpty() -> {
-                    Toast.makeText(this, getString(R.string.correo), Toast.LENGTH_LONG).show()
-                    correo_edit_text.requestFocus()
+
+                identificacion.isEmpty() -> {
+                    identificacion_edit_text.error = getString(R.string.identificacion)
+                    identificacion_edit_text.requestFocus()
                 }
                 telefono.isEmpty() -> {
-                    Toast.makeText(this, getString(R.string.telefono), Toast.LENGTH_LONG).show()
+                    numero_edit_text.error = getString(R.string.telefono)
                     numero_edit_text.requestFocus()
                 }
+                correo.isEmpty() -> {
+                    correo_edit_text.error = getString(R.string.correo)
+                    correo_edit_text.requestFocus()
+                }
                 contrasena.isEmpty() -> {
-                    Toast.makeText(this,getString(R.string.contraseña), Toast.LENGTH_LONG).show();
-                    contraseña_edit_text.requestFocus();
+                    contraseña_edit_text.error = getString(R.string.contraseña)
+                    contraseña_edit_text.requestFocus()
                 }
                 cadena < 6 -> {
-                    Toast.makeText(this,getString(R.string.caracteres), Toast.LENGTH_LONG).show();
-                    contraseña_edit_text.requestFocus();
+                    Toast.makeText(this, getString(R.string.caracteres), Toast.LENGTH_LONG).show()
+                    contraseña_edit_text.requestFocus()
                 }
-                fecha == getText(R.string.fecha_nacimiento)-> {
-                    Toast.makeText(this,getString(R.string.fecha_nacimiento), Toast.LENGTH_LONG).show();
-                    confirmar_edit_text.requestFocus();
+                fecha == getText(R.string.fecha_nacimiento) -> {
+                    Toast.makeText(this, getString(R.string.fecha_nacimiento), Toast.LENGTH_LONG)
+                        .show()
+                    confirmar_edit_text.requestFocus()
                 }
                 contrasena != confirmar -> {
                     error_contrase_text_view.text = getText(R.string.contraseña_no_coincide)
-                    confirmar_edit_text.requestFocus();
+                    confirmar_edit_text.requestFocus()
                 }
                 else -> {
-                    error_contrase_text_view.text =
-                        EMPTY
-                    //respuesta_text_view.text = getString(R.string.respuesta, nombre, correo, contrasena, telefono, genero, pasatiempos,fecha, ciudaddenacimiento)
+                    error_contrase_text_view.text = EMPTY
 
-                    Toast.makeText(this,getString(R.string.exito),Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.exito), Toast.LENGTH_SHORT).show()
 
                     val intent = Intent(this, LoginActivity::class.java)
-                    intent.putExtra("correo",correo)
-                    intent.putExtra("contrasena",contrasena)
+                    intent.putExtra("nombre", nombre)
+                    intent.putExtra("correo", correo)
+                    intent.putExtra("contrasena", contrasena)
                     startActivity(intent)
                     finish()
                 }
@@ -154,6 +160,4 @@ class RegistroActivity : AppCompatActivity() {
         super.onRestart()
         Log.d("Método","onRestart")
     }
-
-    fun showDatePickerDialog(view: View) {}
 }

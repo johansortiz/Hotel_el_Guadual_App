@@ -11,14 +11,37 @@
     <string name="registrar">Register</string>
     <string name="contraseña_no_coincide">passwords do not match</string>
     <string name="fecha_nacimiento">Date of birth</string>
-    <string name="lugar_de_nacimiento">City of birth</string>
+    <string name="tipo_documento">document type</string>
     <string name="login">LOGIN</string>
     <string name="registrologin">REGISTRY</string>
     <string name="exito">Successful registration</string>
     <string name="caracteres">Password must contain more than 5 characters</string>
     <string name="login_correo">Enter an email</string>
     <string name="login_contrasena">Please enter a password</string>
-    <string name="identificacion">Identificación</string>
+    <string name="identificacion">ID</string>
     <string name="bienvenido">Welcome</string>
     <string name="salir">Exit</string>
+    <string-array name="tipo_documento">
+        <item>document type</item>
+        <item>Citizenship ID</item>
+        <item>Foreigner ID</item>
+        <item>Passport</item>
+    </string-array>
+    <string name="title_activity_main__cliente_">Main_Cliente_Activity</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="menu_home">Hotel el Guadual</string>
+    <string name="informacion">Information and Reservation</string>
+    <string name="restaurante">Restaurant</string>
+    <string name="tienda">Store</string>
+    <string name="lugares">Places of interest</string>
+    <string name="gestion">Manage account</string>
+    <string name="gestionar_cuenta">gestionar cuenta usuario, actualizar datos, cerrar sesion</string>
+    <string name="informacion_hotel_promociones_y_descuentos">informacion hotel, promociones y descuentos</string>
+    <string name="info_y_reservas">infomacion de las habitaciones y reserva gestor de reservas</string>
+    <string name="lugares_interes">lugares de interes cercanos al hotel, ¿qué visitar?</string>
+    <string name="info_restaurante">información Restaurante, menú del día y demás servicios de restaurante</string>
+    <string name="tienda_hotel">informacion de productos ofrecidos por el hotel para la venta</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+
+
 </resources>

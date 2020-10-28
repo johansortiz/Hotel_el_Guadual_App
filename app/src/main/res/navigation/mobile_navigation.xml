@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_info"
+        android:name="com.johans.hotelelguadualapp.ui.informacion.InfoFragment"
+        android:label="@string/informacion"
+        tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.johans.hotelelguadualapp.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_restaurante"
+        android:name="com.johans.hotelelguadualapp.ui.restaurante.RestauranteFragment"
+        android:label="@string/restaurante"
+        tools:layout="@layout/fragment_restaurante" />
+    <fragment
+        android:id="@+id/nav_tienda"
+        android:name="com.johans.hotelelguadualapp.ui.tienda.TiendaFragment"
+        android:label="@string/tienda"
+        tools:layout="@layout/fragment_tienda" />
+    <fragment
+        android:id="@+id/nav_lugares"
+        android:name="com.johans.hotelelguadualapp.ui.lugares.LugaresFragment"
+        android:label="@string/lugares"
+        tools:layout="@layout/fragment_lugares" />
+    <fragment
+        android:id="@+id/nav_cuenta"
+        android:name="com.johans.hotelelguadualapp.ui.cuenta.CuentaFragment"
+        android:label="@string/gestion"
+        tools:layout="@layout/fragment_cuenta" />
+</navigation>
