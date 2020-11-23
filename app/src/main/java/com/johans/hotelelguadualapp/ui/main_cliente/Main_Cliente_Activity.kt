@@ -13,12 +13,19 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.johans.hotelelguadualapp.R
+import com.johans.hotelelguadualapp.server.usuarioserver
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 class Main_Cliente_Activity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var auth: FirebaseAuth
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +33,8 @@ class Main_Cliente_Activity : AppCompatActivity() {
         setContentView(R.layout.activity_main__cliente_)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        auth = FirebaseAuth.getInstance()
 
         val fab: FloatingActionButton = findViewById(R.id.fab)
         fab.setOnClickListener { view ->
@@ -53,17 +62,34 @@ class Main_Cliente_Activity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
-        val datos_recibidos_ppal = intent.extras
-        val correo_r = datos_recibidos_ppal?.getString("correo_main")
-        val usuario_r = datos_recibidos_ppal?.getString("usuario_main")
-
-        usuario_text_view.text = usuario_r
-        correo_usu_text_view.text = correo_r
+        buscarenFirebase()
         return true
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    private fun buscarenFirebase() {
+        val database = FirebaseDatabase.getInstance()
+        val myUsuarioRef = database.getReference("usuarios")
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (data: DataSnapshot in snapshot.children) {
+                    val uid = auth.currentUser?.uid
+                    val Usuarioserver = data.getValue(usuarioserver::class.java)
+                    if (Usuarioserver?.id.equals(uid)) {
+                        usuario_text_view.text = (Usuarioserver?.nombre)
+                        correo_usu_text_view.text = (Usuarioserver?.email)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        }
+        myUsuarioRef.addValueEventListener(postListener)
     }
 }

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "638407462953",
+    "firebase_url": "https://hotel-el-guadual-app.firebaseio.com",
+    "project_id": "hotel-el-guadual-app",
+    "storage_bucket": "hotel-el-guadual-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638407462953:android:534472fc4b01ab33840c38",
+        "android_client_info": {
+          "package_name": "com.johans.hotelelguadualapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638407462953-k1lm2gbi24d6v4a6nlnq0dkm4hc28qu8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDd7uNvcJHzHu-lYLs6kkXIF4xsyTQfd8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638407462953-k1lm2gbi24d6v4a6nlnq0dkm4hc28qu8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

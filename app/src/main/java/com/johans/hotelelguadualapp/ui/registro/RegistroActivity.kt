@@ -7,13 +7,21 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.johans.hotelelguadualapp.R
+import com.johans.hotelelguadualapp.server.usuarioserver
 import com.johans.hotelelguadualapp.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_registro.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 class RegistroActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
 
     companion object {
         private const val EMPTY = ""
@@ -24,13 +32,14 @@ class RegistroActivity : AppCompatActivity() {
 
     private var fechaNacimiento: String = ""
     private var cal = Calendar.getInstance()
+    private var corroaux = ""
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
 
-        Log.d("Método","onCreate")
+        auth = FirebaseAuth.getInstance()
 
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { view, year, month, dayOfmonth ->
@@ -65,7 +74,9 @@ class RegistroActivity : AppCompatActivity() {
 
             val fecha = btn_show.text.toString()
             val cadena: Int = contrasena.length
-            val tipodocumento = tipo_documento_spinner.selectedItem
+            val tipodocumento = tipo_documento_spinner.selectedItem.toString()
+            val tipo_usuario = "Cliente"
+            buscarenFirebase(correo)
 
             when {
                 nombre.isEmpty() -> {
@@ -108,21 +119,111 @@ class RegistroActivity : AppCompatActivity() {
                     error_contrase_text_view.text = getText(R.string.contraseña_no_coincide)
                     confirmar_edit_text.requestFocus()
                 }
+                corroaux == correo -> {
+                    Toast.makeText(
+                        baseContext, "Ya existe un usuario con este correo en base de datos",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    correo_edit_text.requestFocus()
+                }
                 else -> {
                     error_contrase_text_view.text = EMPTY
-
-                    Toast.makeText(this, getString(R.string.exito), Toast.LENGTH_SHORT).show()
-
-                    val intent = Intent(this, LoginActivity::class.java)
-                    intent.putExtra("nombre", nombre)
-                    intent.putExtra("correo", correo)
-                    intent.putExtra("contrasena", contrasena)
-                    startActivity(intent)
-                    finish()
+                    registroEnFirebase(
+                        correo,
+                        contrasena,
+                        nombre,
+                        tipodocumento,
+                        identificacion,
+                        telefono,
+                        tipo_usuario
+                    )
                 }
             }
 
         }
+    }
+
+    private fun registroEnFirebase(
+        correo: String,
+        contrasena: String,
+        nombre: String,
+        tipodocumento: String,
+        identificacion: String,
+        telefono: String,
+        tipo_usuario: String
+    ) {
+        auth.createUserWithEmailAndPassword(correo, contrasena)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val uid = auth.currentUser?.uid
+                    crearUsuarioenBaseDatos(
+                        uid,
+                        nombre,
+                        tipodocumento,
+                        identificacion,
+                        telefono,
+                        correo,
+                        tipo_usuario
+                    )
+
+                } else {
+                    Toast.makeText(
+                        baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
+    private fun crearUsuarioenBaseDatos(
+        uid: String?,
+        nombre: String?,
+        tipodocumento: String?,
+        identificacion: String?,
+        telefono: String?,
+        correo: String,
+        tipo_usuario: String?
+    ) {
+        val database = FirebaseDatabase.getInstance()
+        val myUserReference = database.getReference("usuarios")
+
+        val Usuarioserver = usuarioserver(
+            uid,
+            nombre,
+            tipodocumento,
+            identificacion,
+            telefono,
+            correo,
+            tipo_usuario
+        )
+        uid?.let {
+            myUserReference.child(uid).setValue(Usuarioserver)
+        }
+        goToLoginActivity()
+    }
+
+    private fun buscarenFirebase(correo: String) {
+        val database = FirebaseDatabase.getInstance()
+        val myUsuarioRef = database.getReference("usuarios")
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (data: DataSnapshot in snapshot.children) {
+                    val Usuarioserver = data.getValue(usuarioserver::class.java)
+                    if (Usuarioserver?.email.equals(correo)) {
+                        corroaux = (Usuarioserver?.email.toString())
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        }
+        myUsuarioRef.addValueEventListener(postListener)
+    }
+
+    private fun goToLoginActivity() {
+        onBackPressed()
     }
 
     override fun onBackPressed() {
@@ -131,6 +232,7 @@ class RegistroActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
     override fun onStart() {
         super.onStart()
         Log.d("Método","onStart")

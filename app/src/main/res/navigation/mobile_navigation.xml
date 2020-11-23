@@ -35,4 +35,14 @@
         android:name="com.johans.hotelelguadualapp.ui.cuenta.CuentaFragment"
         android:label="@string/gestion"
         tools:layout="@layout/fragment_cuenta" />
+    <fragment
+        android:id="@+id/listaHabitacionesFragment"
+        android:name="com.johans.hotelelguadualapp.ui.listas.habitaciones.ListaHabitacionesFragment"
+        android:label="@string/info_y_reservas"
+        tools:layout="@layout/fragment_lista_habitaciones" />
+    <fragment
+        android:id="@+id/listaProductoskFragment"
+        android:name="com.johans.hotelelguadualapp.ui.listas.productos.ListaProductoskFragment"
+        android:label="fragment_lista_productosk"
+        tools:layout="@layout/fragment_lista_productosk" />
 </navigation>

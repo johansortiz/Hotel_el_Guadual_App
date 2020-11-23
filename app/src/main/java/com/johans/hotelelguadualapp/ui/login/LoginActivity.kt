@@ -4,30 +4,28 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import com.johans.hotelelguadualapp.R
 import com.johans.hotelelguadualapp.ui.main_cliente.Main_Cliente_Activity
 import com.johans.hotelelguadualapp.ui.registro.RegistroActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val datos_recibidos = intent.extras
-        val usuario = datos_recibidos?.getString("nombre")
-        val correo_recibido = datos_recibidos?.getString("correo")
-        val contrasena_recibido = datos_recibidos?.getString("contrasena")
+        auth = FirebaseAuth.getInstance()
 
         registro_login_btn.setOnClickListener {
-            val intent = Intent(this, RegistroActivity::class.java)
-            startActivity(intent)
-            finish()
+            goToResgistroActivity()
         }
         
 
         login_btn.setOnClickListener{
-            val usuario_login = usuario.toString()
             val correo_login = email_login_edit_text.text.toString()
             val contrasena_login = passwor_login_edit_text.text.toString()
 
@@ -40,19 +38,38 @@ class LoginActivity : AppCompatActivity() {
                     passwor_login_edit_text.error = getString(R.string.login_contrasena)
                     passwor_login_edit_text.requestFocus()
                 }
-                correo_login == correo_recibido && contrasena_login == contrasena_recibido -> {
-                    val intent = Intent(this, Main_Cliente_Activity::class.java)
-                    intent.putExtra("usuario_main", usuario_login)
-                    intent.putExtra("correo_main", correo_login)
-                    intent.putExtra("contra_main", contrasena_login)
-                    startActivity(intent)
-                    finish()
-                }
                 else -> {
-                    Toast.makeText(this, "Usuario o contraseña erroneos", Toast.LENGTH_LONG).show()
+                    loginWithFirebase(correo_login, contrasena_login)
                 }
-
             }
         }
+    }
+
+    private fun loginWithFirebase(correoLogin: String, contrasenaLogin: String) {
+        auth.signInWithEmailAndPassword(correoLogin, contrasenaLogin)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    goMainActivity()
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Toast.makeText(
+                        baseContext, "Usuario o contraseña incorrectos",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+    }
+
+    private fun goMainActivity() {
+        val intent = Intent(this, Main_Cliente_Activity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun goToResgistroActivity() {
+        val intent = Intent(this, RegistroActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

@@ -31,7 +31,7 @@
     <string name="menu_home">Hotel el Guadual</string>
     <string name="informacion">Información y Reserva</string>
     <string name="restaurante">Restaurante</string>
-    <string name="tienda">Tienda</string>
+    <string name="tienda">Nuestra Tienda</string>
     <string name="lugares">Sitios de interés</string>
     <string name="gestion">Gestionar cuenta</string>
     <string name="gestionar_cuenta">gestionar cuenta usuario, actualizar datos, cerrar sesion</string>
@@ -41,6 +41,14 @@
     <string name="info_restaurante">información Restaurante, menú del día y demás servicios de restaurante</string>
     <string name="tienda_hotel">informacion de productos ofrecidos por el hotel para la venta</string>
     <string name="cerrar_sesion">Cerrar sesión</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="estado">Estado</string>
+    <string name="valor">Valor</string>
+    <string name="descripci_n">Descripción</string>
+    <string name="id_habitacion">id Habitacion</string>
+    <string name="nuestra_tienda">Nuestra tienda</string>
+    <string name="mis_datos">Mis datos</string>
+    <string name="editar_mis_datos"><u>Editar Mis Datos</u></string>
 
 
 </resources>
