@@ -6,11 +6,6 @@
     app:startDestination="@id/nav_home">
 
     <fragment
-        android:id="@+id/nav_info"
-        android:name="com.johans.hotelelguadualapp.ui.informacion.InfoFragment"
-        android:label="@string/informacion"
-        tools:layout="@layout/fragment_info" />
-    <fragment
         android:id="@+id/nav_home"
         android:name="com.johans.hotelelguadualapp.ui.home.HomeFragment"
         android:label="@string/menu_home"
@@ -20,29 +15,38 @@
         android:name="com.johans.hotelelguadualapp.ui.restaurante.RestauranteFragment"
         android:label="@string/restaurante"
         tools:layout="@layout/fragment_restaurante" />
-    <fragment
-        android:id="@+id/nav_tienda"
-        android:name="com.johans.hotelelguadualapp.ui.tienda.TiendaFragment"
-        android:label="@string/tienda"
-        tools:layout="@layout/fragment_tienda" />
-    <fragment
-        android:id="@+id/nav_lugares"
-        android:name="com.johans.hotelelguadualapp.ui.lugares.LugaresFragment"
-        android:label="@string/lugares"
-        tools:layout="@layout/fragment_lugares" />
+
     <fragment
         android:id="@+id/nav_cuenta"
         android:name="com.johans.hotelelguadualapp.ui.cuenta.CuentaFragment"
         android:label="@string/gestion"
         tools:layout="@layout/fragment_cuenta" />
     <fragment
-        android:id="@+id/listaHabitacionesFragment"
+        android:id="@+id/nav_info"
         android:name="com.johans.hotelelguadualapp.ui.listas.habitaciones.ListaHabitacionesFragment"
         android:label="@string/info_y_reservas"
-        tools:layout="@layout/fragment_lista_habitaciones" />
+        tools:layout="@layout/fragment_lista_habitaciones">
+        <action
+            android:id="@+id/action_nav_info_to_reservaFragment"
+            app:destination="@id/reservaFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/listaProductoskFragment"
+        android:id="@+id/nav_tienda"
         android:name="com.johans.hotelelguadualapp.ui.listas.productos.ListaProductoskFragment"
-        android:label="fragment_lista_productosk"
+        android:label="Nuestra tienda"
         tools:layout="@layout/fragment_lista_productosk" />
+    <fragment
+        android:id="@+id/nav_mapas"
+        android:name="com.johans.hotelelguadualapp.ui.lugares.MapsFragment"
+        android:label="@string/lugares"
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/reservaFragment"
+        android:name="com.johans.hotelelguadualapp.ui.reservas.ReservaFragment"
+        android:label="Reservar"
+        tools:layout="@layout/fragment_reserva">
+        <argument
+            android:name="HabitacionReserva"
+            app:argType="com.johans.hotelelguadualapp.server.HabitacionServer" />
+    </fragment>
 </navigation>

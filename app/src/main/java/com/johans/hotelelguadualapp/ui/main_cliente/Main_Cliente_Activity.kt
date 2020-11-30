@@ -52,7 +52,7 @@ class Main_Cliente_Activity : AppCompatActivity() {
                 R.id.nav_info,
                 R.id.nav_restaurante,
                 R.id.nav_tienda,
-                R.id.nav_lugares,
+                R.id.nav_mapas,
                 R.id.nav_cuenta
             ), drawerLayout
         )

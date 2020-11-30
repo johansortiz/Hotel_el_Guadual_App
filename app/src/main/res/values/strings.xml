@@ -36,7 +36,7 @@
     <string name="gestion">Gestionar cuenta</string>
     <string name="gestionar_cuenta">gestionar cuenta usuario, actualizar datos, cerrar sesion</string>
     <string name="informacion_hotel_promociones_y_descuentos">informacion hotel, promociones y descuentos</string>
-    <string name="info_y_reservas">infomacion de las habitaciones y reserva gestor de reservas</string>
+    <string name="info_y_reservas">infomación  y reserva </string>
     <string name="lugares_interes">lugares de interes cercanos al hotel, ¿qué visitar?</string>
     <string name="info_restaurante">información Restaurante, menú del día y demás servicios de restaurante</string>
     <string name="tienda_hotel">informacion de productos ofrecidos por el hotel para la venta</string>
@@ -49,6 +49,10 @@
     <string name="nuestra_tienda">Nuestra tienda</string>
     <string name="mis_datos">Mis datos</string>
     <string name="editar_mis_datos"><u>Editar Mis Datos</u></string>
+    <string name="valor_por_noche">valor por noche</string>
+    <string name="cantidad_disponible">Cantidad Disponible</string>
+    <string name="valor_unitario">Valor unitario</string>
+    <!-- TODO: Remove or change this placeholder text -->
 
 
 </resources>

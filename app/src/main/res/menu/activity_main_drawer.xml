@@ -9,7 +9,7 @@
             android:icon="@drawable/ic_inicio"
             android:title="@string/menu_home" />
         <item
-            android:id="@+id/listaHabitacionesFragment"
+            android:id="@+id/nav_info"
             android:icon="@drawable/ic_info"
             android:title="@string/informacion" />
         <item
@@ -17,11 +17,11 @@
             android:icon="@drawable/ic_restaurante"
             android:title="@string/restaurante" />
         <item
-            android:id="@+id/listaProductoskFragment"
+            android:id="@+id/nav_tienda"
             android:icon="@drawable/ic_money"
             android:title="@string/nuestra_tienda" />
         <item
-            android:id="@+id/nav_lugares"
+            android:id="@+id/nav_mapas"
             android:icon="@drawable/ic_lugares"
             android:title="@string/lugares" />
         <item

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
@@ -15,7 +16,7 @@ import com.johans.hotelelguadualapp.R
 import com.johans.hotelelguadualapp.server.HabitacionServer
 import kotlinx.android.synthetic.main.fragment_lista_habitaciones.*
 
-class ListaHabitacionesFragment : Fragment() {
+class ListaHabitacionesFragment : Fragment(), HabitacionesRVAdapter.OnItemClickListener {
 
     var listhabitaciones: MutableList<HabitacionServer> = mutableListOf()
     private lateinit var habitacionesRVAdapter: HabitacionesRVAdapter
@@ -39,7 +40,10 @@ class ListaHabitacionesFragment : Fragment() {
 
 
         habitacionesRVAdapter =
-            HabitacionesRVAdapter(listhabitaciones as ArrayList<HabitacionServer>)
+            HabitacionesRVAdapter(
+                listhabitaciones as ArrayList<HabitacionServer>,
+                this@ListaHabitacionesFragment
+            )
 
         habitaciones_recycler_view.adapter = habitacionesRVAdapter
 
@@ -66,5 +70,10 @@ class ListaHabitacionesFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {}
         }
         myHabitacionesRef.addValueEventListener(postListener)
+    }
+
+    override fun onItemClick(habitacion: HabitacionServer) {
+        val action = ListaHabitacionesFragmentDirections.actionNavInfoToReservaFragment(habitacion)
+        findNavController().navigate(action)
     }
 }

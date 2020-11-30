@@ -7,6 +7,7 @@ import android.text.method.KeyListener
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -44,9 +45,8 @@ class CuentaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         buscarenFirebase()
         button_cerrar_sesion.setOnClickListener {
-            val intent = Intent(activity, LoginActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
-            startActivity(intent)
+            val auth = FirebaseAuth.getInstance().signOut()
+            goToLoginActivity()
         }
         edtar_textview.setOnClickListener {
             nombre_edit_text.keyListener = listenernombre
@@ -62,9 +62,20 @@ class CuentaFragment : Fragment() {
             val numero = numero_edit_text.text.toString()
             val correo = correo_edit_text.text.toString()
             actualizarEnFirebase(nombre, identifiacion, numero, correo)
+            nombre_edit_text.keyListener = null
+            identificacion_edit_text.keyListener = null
+            numero_edit_text.keyListener = null
+            Toast.makeText(context, "Información actualizada con éxito", Toast.LENGTH_SHORT).show()
             btnactualizar.visibility = View.INVISIBLE
         }
 
+    }
+
+    private fun goToLoginActivity() {
+
+        val intent = Intent(activity, LoginActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_CLEAR_TASK)
+        startActivity(intent)
     }
 
     private fun actualizarEnFirebase(
@@ -98,10 +109,7 @@ class CuentaFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {
             }
         }
-
-
-        myUsuarioRef.addValueEventListener(postListener)
-
+        myUsuarioRef.addListenerForSingleValueEvent(postListener)
     }
 
     private fun buscarenFirebase() {
@@ -132,7 +140,7 @@ class CuentaFragment : Fragment() {
             override fun onCancelled(error: DatabaseError) {
             }
         }
-        myUsuarioRef.addValueEventListener(postListener)
+        myUsuarioRef.addListenerForSingleValueEvent(postListener)
     }
 
 

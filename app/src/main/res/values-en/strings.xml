@@ -49,6 +49,9 @@
     <string name="nuestra_tienda">Nuestra tienda</string>
     <string name="mis_datos">Mis datos</string>
     <string name="editar_mis_datos">Editar Mis Datos</string>
+    <string name="valor_por_noche">valor por noche</string>
+    <string name="cantidad_disponible">Cantidad Disponible</string>
+    <string name="valor_unitario">Valor unitario</string>
 
 
 </resources>
